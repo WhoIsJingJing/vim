@@ -32,13 +32,13 @@ set rtp+=$GOROOT/misc/vim
 " 显示相关  
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
-set cul "高亮光标所在行
-set cuc
+"set cul "高亮光标所在行
+"set cuc
 set shortmess=atI   " 启动的时候不显示那个援助乌干达儿童的提示  
-set go=             " 不要图形按钮  
-color desert     " 设置背景主题  
-color ron     " 设置背景主题  
-color torte     " 设置背景主题  
+"set go=             " 不要图形按钮  
+color sea     " 设置背景主题  
+"color ron     " 设置背景主题  
+"color torte     " 设置背景主题  
 "set guifont=Courier_New:h10:cANSI   " 设置字体  
 "autocmd InsertLeave * se nocul  " 用浅色高亮当前行  
 autocmd InsertEnter * se cul    " 用浅色高亮当前行  
@@ -285,13 +285,13 @@ autocmd FileType c,cpp map <buffer> <leader><space> :w<cr>:make<cr>
 "代码补全 
 set completeopt=preview,menu 
 "允许插件  
-"filetype plugin on
+filetype plugin on
 "共享剪贴板  
-"set clipboard+=unnamed 
+set clipboard+=unnamed 
 "自动保存
 set autowrite
-"set ruler                   " 打开状态栏标尺
-"set cursorline              " 突出显示当前行
+set ruler                   " 打开状态栏标尺
+set cursorline              " 突出显示当前行
 set magic                   " 设置魔术
 set guioptions-=T           " 隐藏工具栏
 set guioptions-=m           " 隐藏菜单栏
@@ -305,8 +305,8 @@ set noeb
 " 在处理未保存或只读文件的时候，弹出确认
 set confirm
 "禁止生成临时文件
-set nobackup
-set noswapfile
+"set nobackup
+"set noswapfile
 "搜索忽略大小写
 set ignorecase
 
@@ -440,12 +440,12 @@ Bundle 'SQLComplete.vim'
 "Bundle 'Javascript-OmniCompletion-with-YUI-and-j'
 "Bundle 'JavaScript-Indent'
 "Bundle 'Better-Javascript-Indentation'
-Bundle 'jslint.vim'
-Bundle "pangloss/vim-javascript"
+"Bundle 'jslint.vim'
+"Bundle "pangloss/vim-javascript"
 Bundle 'Vim-Script-Updater'
 Bundle 'ctrlp.vim'
 Bundle 'tacahiroy/ctrlp-funky'
-Bundle 'jsbeautify'
+"Bundle 'jsbeautify'
 Bundle 'The-NERD-Commenter'
 "django
 "Bundle 'django_templates.vim'
@@ -453,6 +453,13 @@ Bundle 'The-NERD-Commenter'
 
 "Bundle 'FredKSchott/CoVim'
 "Bundle 'djangojump'
+"
+"rust
+Bundle 'rust-lang/rust.vim'
+"let g:rustfmt_autosave = 1
+"golang
+"
+Bundle 'fatih/vim-go'
 " ...
 let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
