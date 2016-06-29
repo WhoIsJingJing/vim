@@ -11,46 +11,43 @@ set wildmenu
 set mousemodel=popup
 
 au FileType php setlocal dict+=~/.vim/dict/php_funclist.dict
-au FileType css setlocal dict+=~/.vim/dict/css.dict
+"au FileType css setlocal dict+=~/.vim/dict/css.dict
 au FileType c setlocal dict+=~/.vim/dict/c.dict
 au FileType cpp setlocal dict+=~/.vim/dict/cpp.dict
 au FileType scale setlocal dict+=~/.vim/dict/scale.dict
-au FileType javascript setlocal dict+=~/.vim/dict/javascript.dict
-au FileType html setlocal dict+=~/.vim/dict/javascript.dict
-au FileType html setlocal dict+=~/.vim/dict/css.dict
+"au FileType javascript setlocal dict+=~/.vim/dict/javascript.dict
+"au FileType html setlocal dict+=~/.vim/dict/javascript.dict
+"au FileType html setlocal dict+=~/.vim/dict/css.dict
 
 "
 "syntastic相关
-execute pathogen#infect()
-let g:syntastic_python_checkers=['pylint']
-let g:syntastic_php_checkers=['php', 'phpcs', 'phpmd']
-"golang
-"Processing... % (ctrl+c to stop)
-let g:fencview_autodetect=0
-set rtp+=$GOROOT/misc/vim
+"execute pathogen#infect()
+"let g:syntastic_python_checkers=['pylint']
+"let g:syntastic_php_checkers=['php', 'phpcs', 'phpmd']
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 显示相关  
+" 显示相关
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
 "set cul "高亮光标所在行
 "set cuc
-set shortmess=atI   " 启动的时候不显示那个援助乌干达儿童的提示  
-"set go=             " 不要图形按钮  
-color sea     " 设置背景主题  
-"color ron     " 设置背景主题  
-"color torte     " 设置背景主题  
-"set guifont=Courier_New:h10:cANSI   " 设置字体  
-"autocmd InsertLeave * se nocul  " 用浅色高亮当前行  
-autocmd InsertEnter * se cul    " 用浅色高亮当前行  
-set ruler           " 显示标尺  
-set showcmd         " 输入的命令显示出来，看的清楚些  
-"set whichwrap+=<,>,h,l   " 允许backspace和光标键跨越行边界(不建议)  
-set scrolloff=3     " 光标移动到buffer的顶部和底部时保持3行距离  
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}   "状态行显示的内容  
-set laststatus=2    " 启动显示状态行(1),总是显示状态行(2)  
-"set foldenable      " 允许折叠  
-""set foldmethod=manual   " 手动折叠  
-set nocompatible  "去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限  
+set shortmess=atI   " 启动的时候不显示那个援助乌干达儿童的提示
+"set go=             " 不要图形按钮
+color sea     " 设置背景主题
+"color ron     " 设置背景主题
+"color torte     " 设置背景主题
+"set guifont=Courier_New:h10:cANSI   " 设置字体
+"autocmd InsertLeave * se nocul  " 用浅色高亮当前行
+autocmd InsertEnter * se cul    " 用浅色高亮当前行
+set ruler           " 显示标尺
+set showcmd         " 输入的命令显示出来，看的清楚些
+"set whichwrap+=<,>,h,l   " 允许backspace和光标键跨越行边界(不建议)
+set scrolloff=3     " 光标移动到buffer的顶部和底部时保持3行距离
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}   "状态行显示的内容
+set laststatus=2    " 启动显示状态行(1),总是显示状态行(2)
+"set foldenable      " 允许折叠
+""set foldmethod=manual   " 手动折叠
+set nocompatible  "去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限
 " 显示中文帮助
 if version >= 603
 	set helplang=cn
@@ -96,7 +93,7 @@ set iskeyword+=_,$,@,%,#,-
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}   set filetype=mkd
 au BufRead,BufNewFile *.{go}   set filetype=go
 au BufRead,BufNewFile *.{js}   set filetype=javascript
-"rkdown to HTML  
+"rkdown to HTML
 nmap md :!~/.vim/markdown.pl % > %.html <CR><CR>
 nmap fi :!firefox %.html & <CR><CR>
 nmap \ \cc
@@ -110,34 +107,34 @@ nmap tt :%s/\t/    /g<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""新文件标题
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"新建.c,.h,.sh,.java文件，自动插入文件头 
-autocmd BufNewFile *.cpp,*.[ch],*.sh,*.rb,*.java,*.py exec ":call SetTitle()" 
-""定义函数SetTitle，自动插入文件头 
-func SetTitle() 
-	"如果文件类型为.sh文件 
+"新建.c,.h,.sh,.java文件，自动插入文件头
+autocmd BufNewFile *.cpp,*.[ch],*.sh,*.bash,*.rb,*.java,*.py exec ":call SetTitle()"
+""定义函数SetTitle，自动插入文件头
+func SetTitle()
+	"如果文件类型为.sh文件
 	if &filetype == 'sh'
 		call setline(1,"\#!/usr/bin/env bash")
 		call append(line(".")+2,"# Created Time:".strftime("%c"))
-		call append(line(".")+3, "") 
+		call append(line(".")+3, "")
+    elseif &filetype =='bash'
+		call setline(1,"\#!/usr/bin/env bash")
+		call append(line(".")+2,"# Created Time:".strftime("%c"))
+		call append(line(".")+3, "")
 	elseif &filetype == 'python'
 		call setline(1,"#!/usr/bin/env python3")
 		call append(line("."),"# -*- coding: UTF-8 -*-")
-		call append(line(".")+1, "") 
-
+		call append(line(".")+1, "")
 	elseif &filetype == 'ruby'
         	call setline(1,"#!/usr/bin/env ruby")
         	call append(line("."),"# encoding: utf-8")
 		call append(line(".")+1, "")
-
-"    elseif &filetype == 'mkd'
-"        call setline(1,"<head><meta charset=\"UTF-8\"></head>")
-	else 
-		call setline(1, "/*************************************************************************") 
-		call append(line("."), "	> File Name: ".expand("%")) 
-		call append(line(".")+1, "	> Author: ") 
-		call append(line(".")+2, "	> Mail: ") 
-		call append(line(".")+3, "	> Created Time: ".strftime("%c")) 
-		call append(line(".")+4, " ************************************************************************/") 
+	else
+		call setline(1, "/*************************************************************************")
+		call append(line("."), "	> File Name: ".expand("%"))
+		call append(line(".")+1, "	> Author: ")
+		call append(line(".")+2, "	> Mail: ")
+		call append(line(".")+3, "	> Created Time: ".strftime("%c"))
+		call append(line(".")+4, " ************************************************************************/")
 		call append(line(".")+5, "")
 	endif
 	if expand("%:e") == 'cpp'
@@ -154,12 +151,8 @@ func SetTitle()
 		call append(line(".")+7, "#define _".toupper(expand("%:r"))."_H")
 		call append(line(".")+8, "#endif")
 	endif
-	if &filetype == 'java'
-		call append(line(".")+6,"public class ".expand("%:r"))
-		call append(line(".")+7,"")
-	endif
 	"新建文件后，自动定位到文件末尾
-endfunc 
+endfunc
 autocmd BufNewFile * normal G
 
 
@@ -186,17 +179,17 @@ imap <C-e> <Esc>$
 vmap <C-c> "+y
 set mouse=v
 "set clipboard=unnamed
-"去空行  
-nnoremap <F2> :g/^\s*$/d<CR> 
-"比较文件  
-nnoremap <C-F2> :vert diffsplit 
+"去空行
+nnoremap <F2> :g/^\s*$/d<CR>
+"比较文件
+nnoremap <C-F2> :vert diffsplit
 "nnoremap <Leader>fu :CtrlPFunky<Cr>
 "nnoremap <C-n> :CtrlPFunky<Cr>
-"列出当前目录文件  
+"列出当前目录文件
 map <F3> :NERDTreeToggle<CR>
 imap <F3> <ESC> :NERDTreeToggle<CR>
-"打开树状文件目录  
-map <C-F3> \be  
+"打开树状文件目录
+map <C-F3> \be
 :autocmd BufRead,BufNewFile *.dot map <F5> :w<CR>:!dot -Tjpg -o %<.jpg % && eog %<.jpg  <CR><CR> && exec "redr!"
 "C，C++ 按F5编译运行
 map <F5> :call CompileRunGcc()<CR>
@@ -208,8 +201,8 @@ func! CompileRunGcc()
 	elseif &filetype == 'cpp'
 		exec "!g++ % -o %<"
 		exec "!time ./%<"
-	elseif &filetype == 'java' 
-		exec "!javac %" 
+	elseif &filetype == 'java'
+		exec "!javac %"
 		exec "!time java %<"
 	elseif &filetype == 'sh'
 		:!time bash %
@@ -273,31 +266,38 @@ if has("autocmd")
           \   exe "normal g`\"" |
           \ endif
 endif
+
 "当打开vim且没有文件时自动打开NERDTree
 autocmd vimenter * if !argc() | NERDTree | endif
+
 " 只剩 NERDTree时自动关闭
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " 设置当文件被改动时自动载入
 set autoread
+
 " quickfix模式
 autocmd FileType c,cpp map <buffer> <leader><space> :w<cr>:make<cr>
-"代码补全 
-set completeopt=preview,menu 
-"允许插件  
-filetype plugin on
-"共享剪贴板  
-set clipboard+=unnamed 
+
+"代码补全
+set completeopt=preview,menu
+
+"允许插件
+"filetype plugin on
+
+"共享剪贴板
+set clipboard+=unnamed
+
 "自动保存
 set autowrite
 set ruler                   " 打开状态栏标尺
-set cursorline              " 突出显示当前行
+"set cursorline              " 突出显示当前行
 set magic                   " 设置魔术
 set guioptions-=T           " 隐藏工具栏
 set guioptions-=m           " 隐藏菜单栏
 ""set foldcolumn=0
-""set foldmethod=indent 
-""set foldlevel=3 
+""set foldmethod=indent
+""set foldlevel=3
 " 不要使用vi的键盘模式，而是vim自己的
 set nocompatible
 " 去掉输入错误的提示声音
@@ -309,9 +309,6 @@ set confirm
 "set noswapfile
 "搜索忽略大小写
 set ignorecase
-
-
-
 
 set linespace=0
 " 增强模式中的命令行自动完成操作
@@ -329,7 +326,7 @@ set report=0
 " 在被分割的窗口间显示空白，便于阅读
 set fillchars=vert:\ ,stl:\ ,stlnc:\
 " 高亮显示匹配的括号
-set showmatch
+"set showmatch
 " 匹配括号高亮的时间（单位是十分之一秒）
 set matchtime=1
 " 光标移动到buffer的顶部和底部时保持3行距离
@@ -351,42 +348,42 @@ set scrolloff=3
 ""		return a:char
 ""	endif
 ""endfunction
-filetype plugin indent on 
+filetype plugin indent on
 "打开文件类型检测, 加了这句才可以用智能补全
 set completeopt=longest,menu
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" CTags的设定  
+" CTags的设定
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let Tlist_Sort_Type = "name"    " 按照名称排序  
-let Tlist_Use_Right_Window = 1  " 在右侧显示窗口  
-let Tlist_Compart_Format = 1    " 压缩方式  
-let Tlist_Exist_OnlyWindow = 1  " 如果只有一个buffer，kill窗口也kill掉buffer  
-""let Tlist_File_Fold_Auto_Close = 0  " 不要关闭其他文件的tags  
-""let Tlist_Enable_Fold_Column = 0    " 不要显示折叠树  
+let Tlist_Sort_Type = "name"    " 按照名称排序
+let Tlist_Use_Right_Window = 1  " 在右侧显示窗口
+let Tlist_Compart_Format = 1    " 压缩方式
+let Tlist_Exist_OnlyWindow = 1  " 如果只有一个buffer，kill窗口也kill掉buffer
+""let Tlist_File_Fold_Auto_Close = 0  " 不要关闭其他文件的tags
+""let Tlist_Enable_Fold_Column = 0    " 不要显示折叠树
 "let Tlist_Show_One_File=1            "不同时显示多个文件的tag，只显示当前文件的
-"设置tags  
-set tags=tags;  
-set autochdir 
+"设置tags
+set tags=tags;
+set autochdir
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "其他东东
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"默认打开Taglist 
-let Tlist_Auto_Open=0 
-"""""""""""""""""""""""""""""" 
-" Tag list (ctags) 
-"""""""""""""""""""""""""""""""" 
-let Tlist_Ctags_Cmd = '/usr/local/bin/ctags' 
-let Tlist_Show_One_File = 1 "不同时显示多个文件的tag，只显示当前文件的 
+"默认打开Taglist
+let Tlist_Auto_Open=0
+""""""""""""""""""""""""""""""
+" Tag list (ctags)
+""""""""""""""""""""""""""""""""
+let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
+let Tlist_Show_One_File = 1 "不同时显示多个文件的tag，只显示当前文件的
 let Tlist_File_Fold_Auto_Close = 1
-let Tlist_Exit_OnlyWindow = 1 "如果taglist窗口是最后一个窗口，则退出vim 
+let Tlist_Exit_OnlyWindow = 1 "如果taglist窗口是最后一个窗口，则退出vim
 let Tlist_Use_Right_Window = 1 "在右侧窗口中显示taglist窗口
 " minibufexpl插件的一般设置
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1  
+let g:miniBufExplModSelTarget = 1
 nmap tl :Tlist<cr>
 
 "python补全
@@ -397,13 +394,10 @@ let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
-
-
 set iskeyword+=.
 set termencoding=utf-8
 set encoding=utf8
 set fileencodings=utf8,ucs-bom,gbk,cp936,gb2312,gb18030
-
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 
 "set nocompatible               " be iMproved
@@ -413,7 +407,7 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
-" required! 
+" required!
 Bundle 'gmarik/vundle'
 
 " My Bundles here:
@@ -423,6 +417,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'Yggdroot/indentLine'
 let g:indentLine_char = '┊'
+
 "ndle 'tpope/vim-rails.git'
 " vim-scripts repos
 Bundle 'L9'
@@ -435,45 +430,468 @@ Bundle 'CaptureClipboard'
 Bundle 'ctrlp-modified.vim'
 Bundle 'last_edit_marker.vim'
 Bundle 'synmark.vim'
-"Bundle 'Python-mode-klen'
 Bundle 'SQLComplete.vim'
-"Bundle 'Javascript-OmniCompletion-with-YUI-and-j'
-"Bundle 'JavaScript-Indent'
-"Bundle 'Better-Javascript-Indentation'
 "Bundle 'jslint.vim'
-"Bundle "pangloss/vim-javascript"
 Bundle 'Vim-Script-Updater'
 Bundle 'ctrlp.vim'
 Bundle 'tacahiroy/ctrlp-funky'
 "Bundle 'jsbeautify'
 Bundle 'The-NERD-Commenter'
-"django
-"Bundle 'django_templates.vim'
-"Bundle 'Django-Projects'
 
-"Bundle 'FredKSchott/CoVim'
-"Bundle 'djangojump'
-"
+"Python
+Bundle 'https://github.com/klen/python-mode.git'
+"hex
+Bundle 'https://github.com/Shougo/vinarise.vim.git'
 "rust
 Bundle 'rust-lang/rust.vim'
-"let g:rustfmt_autosave = 1
 "golang
-"
 Bundle 'fatih/vim-go'
+"JavaScript
+Bundle 'https://github.com/pangloss/vim-javascript.git'
+"lua
+Bundle 'https://github.com/xolox/vim-misc.git'
+Bundle 'https://github.com/xolox/vim-lua-ftplugin.git'
+"nginx
+Bundle 'https://github.com/evanmiller/nginx-vim-syntax.git'
+
 " ...
 let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
-
+"
 filetype plugin indent on     " required!
 "
 "ctrlp设置
 "
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.png,*.jpg,*.gif     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.pyc,*.png,*.jpg,*.gif  " Windows
-
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = '\v\.(exe|so|dll)$'
 let g:ctrlp_extensions = ['funky']
-
 let NERDTreeIgnore=['\.pyc']
+
+
+
+
+"######################################
+"##====================================
+"######################################
+
+" Fisa-vim-config
+" http://fisadev.github.io/fisa-vim-config/
+" version: 8.2
+
+" ============================================================================
+" Vim-plug initialization
+" Avoid modify this section, unless you are very sure of what you are doing
+
+let vim_plug_just_installed = 0
+let vim_plug_path = expand('~/.vim/autoload/plug.vim')
+if !filereadable(vim_plug_path)
+    echo "Installing Vim-plug..."
+    echo ""
+    silent !mkdir -p ~/.vim/autoload
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    let vim_plug_just_installed = 1
+endif
+
+" manually load vim-plug the first time
+if vim_plug_just_installed
+    :execute 'source '.fnameescape(vim_plug_path)
+endif
+
+" Obscure hacks done, you can now modify the rest of the .vimrc as you wish :)
+
+" ============================================================================
+" Active plugins
+" You can disable or add new ones here:
+
+" this needs to be here, so vim-plug knows we are declaring the plugins we
+" want to use
+call plug#begin('~/.vim/plugged')
+
+" Plugins from github repos:
+
+" Override configs by directory
+Plug 'arielrossanigo/dir-configs-override.vim'
+" Better file browser
+Plug 'scrooloose/nerdtree'
+" Code commenter
+Plug 'scrooloose/nerdcommenter'
+" Class/module browser
+Plug 'majutsushi/tagbar'
+" Code and files fuzzy finder
+Plug 'ctrlpvim/ctrlp.vim'
+" Extension to ctrlp, for fuzzy command finder
+Plug 'fisadev/vim-ctrlp-cmdpalette'
+" Zen coding
+Plug 'mattn/emmet-vim'
+" Git integration
+Plug 'motemen/git-vim'
+" Tab list panel
+Plug 'kien/tabman.vim'
+" Airline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+" Terminal Vim with 256 colors colorscheme
+Plug 'fisadev/fisa-vim-colorscheme'
+" Consoles as buffers
+Plug 'rosenfeld/conque-term'
+" Pending tasks list
+Plug 'fisadev/FixedTaskList.vim'
+" Surround
+Plug 'tpope/vim-surround'
+" Autoclose
+Plug 'Townk/vim-autoclose'
+" Indent text object
+Plug 'michaeljsmith/vim-indent-object'
+" Indentation based movements
+Plug 'jeetsukumaran/vim-indentwise'
+" Python mode (indentation, doc, refactor, lints, code checking, motion and
+" operators, highlighting, run and ipdb breakpoints)
+Plug 'klen/python-mode'
+" Better autocompletion
+Plug 'Shougo/neocomplcache.vim'
+" Snippets manager (SnipMate), dependencies, and snippets repo
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'honza/vim-snippets'
+Plug 'garbas/vim-snipmate'
+" Git/mercurial/others diff icons on the side of the file lines
+Plug 'mhinz/vim-signify'
+" Automatically sort python imports
+Plug 'fisadev/vim-isort'
+" Drag visual blocks arround
+Plug 'fisadev/dragvisuals.vim'
+" Window chooser
+Plug 't9md/vim-choosewin'
+" Python and other languages code checker
+Plug 'scrooloose/syntastic'
+" Paint css colors with the real color
+Plug 'lilydjwg/colorizer'
+" Ack code search (requires ack installed in the system)
+Plug 'mileszs/ack.vim'
+if has('python')
+    " YAPF formatter for Python
+    Plug 'pignacio/vim-yapf-format'
+endif
+" Relative numbering of lines (0 is the current line)
+" (disabled by default because is very intrusive and can't be easily toggled
+" on/off. When the plugin is present, will always activate the relative
+" numbering every time you go to normal mode. Author refuses to add a setting
+" to avoid that)
+" Plug 'myusuf3/numbers.vim'
+
+" Plugins from vim-scripts repos:
+
+" Search results counter
+Plug 'IndexedSearch'
+" XML/HTML tags navigation
+Plug 'matchit.zip'
+" Gvim colorscheme
+Plug 'Wombat'
+" Yank history navigation
+Plug 'YankRing.vim'
+
+"""""""""""""""""""""""""""""""
+Plug 'https://github.com/fidian/hexmode'
+
+" Tell vim-plug we finished declaring plugins, so it can load them
+call plug#end()
+
+" ============================================================================
+" Install plugins the first time vim runs
+
+if vim_plug_just_installed
+    echo "Installing Bundles, please ignore key map error messages"
+    :PlugInstall
+endif
+
+" ============================================================================
+" Vim settings and mappings
+" You can edit them as you wish
+
+" no vi-compatible
+set nocompatible
+
+" allow plugins by file type (required for plugins!)
+filetype plugin on
+filetype indent on
+
+" tabs and spaces handling
+set expandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+
+" tab length exceptions on some file types
+autocmd FileType html setlocal shiftwidth=4 tabstop=4 softtabstop=4
+autocmd FileType htmldjango setlocal shiftwidth=4 tabstop=4 softtabstop=4
+autocmd FileType javascript setlocal shiftwidth=4 tabstop=4 softtabstop=4
+
+" always show status bar
+set ls=2
+
+" incremental search
+set incsearch
+" highlighted search results
+set hlsearch
+
+" syntax highlight on
+syntax on
+
+" show line numbers
+set nu
+
+" tab navigation mappings
+map tn :tabn<CR>
+map tp :tabp<CR>
+map tm :tabm
+map tt :tabnew
+map ts :tab split<CR>
+map <C-S-Right> :tabn<CR>
+imap <C-S-Right> <ESC>:tabn<CR>
+map <C-S-Left> :tabp<CR>
+imap <C-S-Left> <ESC>:tabp<CR>
+
+" navigate windows with meta+arrows
+map <M-Right> <c-w>l
+map <M-Left> <c-w>h
+map <M-Up> <c-w>k
+map <M-Down> <c-w>j
+imap <M-Right> <ESC><c-w>l
+imap <M-Left> <ESC><c-w>h
+imap <M-Up> <ESC><c-w>k
+imap <M-Down> <ESC><c-w>j
+
+" old autocomplete keyboard shortcut
+imap <C-J> <C-X><C-O>
+
+" Comment this line to enable autocompletion preview window
+" (displays documentation related to the selected completion option)
+" Disabled by default because preview makes the window flicker
+set completeopt-=preview
+
+" save as sudo
+ca w!! w !sudo tee "%"
+
+" simple recursive grep
+nmap ,r :Ack
+nmap ,wr :Ack <cword><CR>
+
+" use 256 colors when possible
+if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
+	let &t_Co = 256
+    colorscheme fisa
+else
+    colorscheme delek
+endif
+
+" colors for gvim
+if has('gui_running')
+    colorscheme wombat
+endif
+
+" when scrolling, keep cursor 3 lines away from screen border
+set scrolloff=3
+
+" autocompletion of files and commands behaves like shell
+" (complete only the common part, list the options that match)
+set wildmode=list:longest
+
+" better backup, swap and undos storage
+set directory=~/.vim/dirs/tmp     " directory to place swap files in
+set backup                        " make backup files
+set backupdir=~/.vim/dirs/backups " where to put backup files
+set undofile                      " persistent undos - undo after you re-open the file
+set undodir=~/.vim/dirs/undos
+set viminfo+=n~/.vim/dirs/viminfo
+" store yankring history file there too
+let g:yankring_history_dir = '~/.vim/dirs/'
+
+" create needed directories if they don't exist
+if !isdirectory(&backupdir)
+    call mkdir(&backupdir, "p")
+endif
+if !isdirectory(&directory)
+    call mkdir(&directory, "p")
+endif
+if !isdirectory(&undodir)
+    call mkdir(&undodir, "p")
+endif
+
+" ============================================================================
+" Plugins settings and mappings
+" Edit them as you wish.
+
+" Tagbar -----------------------------
+
+" toggle tagbar display
+map <F4> :TagbarToggle<CR>
+" autofocus on tagbar open
+let g:tagbar_autofocus = 1
+
+" NERDTree -----------------------------
+
+" toggle nerdtree display
+map <F3> :NERDTreeToggle<CR>
+" open nerdtree with the current file selected
+nmap ,t :NERDTreeFind<CR>
+" don;t show these file types
+let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
+
+
+" Tasklist ------------------------------
+
+" show pending tasks list
+map <F2> :TaskList<CR>
+
+" CtrlP ------------------------------
+
+" file finder mapping
+let g:ctrlp_map = ',e'
+" tags (symbols) in current file finder mapping
+nmap ,g :CtrlPBufTag<CR>
+" tags (symbols) in all files finder mapping
+nmap ,G :CtrlPBufTagAll<CR>
+" general code finder in all files mapping
+nmap ,f :CtrlPLine<CR>
+" recent files finder mapping
+nmap ,m :CtrlPMRUFiles<CR>
+" commands finder mapping
+nmap ,c :CtrlPCmdPalette<CR>
+" to be able to call CtrlP with default search text
+function! CtrlPWithSearchText(search_text, ctrlp_command_end)
+    execute ':CtrlP' . a:ctrlp_command_end
+    call feedkeys(a:search_text)
+endfunction
+" same as previous mappings, but calling with current word as default text
+nmap ,wg :call CtrlPWithSearchText(expand('<cword>'), 'BufTag')<CR>
+nmap ,wG :call CtrlPWithSearchText(expand('<cword>'), 'BufTagAll')<CR>
+nmap ,wf :call CtrlPWithSearchText(expand('<cword>'), 'Line')<CR>
+nmap ,we :call CtrlPWithSearchText(expand('<cword>'), '')<CR>
+nmap ,pe :call CtrlPWithSearchText(expand('<cfile>'), '')<CR>
+nmap ,wm :call CtrlPWithSearchText(expand('<cword>'), 'MRUFiles')<CR>
+nmap ,wc :call CtrlPWithSearchText(expand('<cword>'), 'CmdPalette')<CR>
+" don't change working directory
+let g:ctrlp_working_path_mode = 0
+" ignore these files and folders on file finder
+"let g:ctrlp_custom_ignore = {
+"  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|node_modules)$',
+"  \ 'file': '\.pyc$\|\.pyo$',
+"  \ }
+
+" Syntastic ------------------------------
+
+" show list of errors and warnings on the current file
+nmap <leader>e :Errors<CR>
+" check also when just opened the file
+let g:syntastic_check_on_open = 1
+" don't put icons on the sign column (it hides the vcs status icons of signify)
+let g:syntastic_enable_signs = 0
+" custom icons (enable them if you use a patched font, and enable the previous
+" setting)
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_style_error_symbol = '✗'
+let g:syntastic_style_warning_symbol = '⚠'
+
+" Python-mode ------------------------------
+
+" don't use linter, we use syntastic for that
+let g:pymode_lint_on_write = 0
+let g:pymode_lint_signs = 0
+" don't fold python code on open
+let g:pymode_folding = 0
+" don't load rope by default. Change to 1 to use rope
+let g:pymode_rope = 0
+" open definitions on same window, and custom mappings for definitions and
+" occurrences
+let g:pymode_rope_goto_definition_bind = ',d'
+let g:pymode_rope_goto_definition_cmd = 'e'
+nmap ,D :tab split<CR>:PymodePython rope.goto()<CR>
+nmap ,o :RopeFindOccurrences<CR>
+
+" NeoComplCache ------------------------------
+
+" most of them not documented because I'm not sure how they work
+" (docs aren't good, had to do a lot of trial and error to make
+" it play nice)
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_ignore_case = 1
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_enable_auto_select = 1
+let g:neocomplcache_enable_fuzzy_completion = 1
+let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplcache_enable_underbar_completion = 1
+let g:neocomplcache_fuzzy_completion_start_length = 1
+let g:neocomplcache_auto_completion_start_length = 1
+let g:neocomplcache_manual_completion_start_length = 1
+let g:neocomplcache_min_keyword_length = 1
+let g:neocomplcache_min_syntax_length = 1
+" complete with workds from any opened file
+let g:neocomplcache_same_filetype_lists = {}
+let g:neocomplcache_same_filetype_lists._ = '_'
+
+" TabMan ------------------------------
+
+" mappings to toggle display, and to focus on it
+let g:tabman_toggle = 'tl'
+let g:tabman_focus  = 'tf'
+
+" Autoclose ------------------------------
+
+" Fix to let ESC work as espected with Autoclose plugin
+let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
+
+" DragVisuals ------------------------------
+
+" mappings to move blocks in 4 directions
+vmap <expr> <S-M-LEFT> DVB_Drag('left')
+vmap <expr> <S-M-RIGHT> DVB_Drag('right')
+vmap <expr> <S-M-DOWN> DVB_Drag('down')
+vmap <expr> <S-M-UP> DVB_Drag('up')
+" mapping to duplicate block
+vmap <expr> D DVB_Duplicate()
+
+" Signify ------------------------------
+
+" this first setting decides in which order try to guess your current vcs
+" UPDATE it to reflect your preferences, it will speed up opening files
+let g:signify_vcs_list = [ 'git', 'hg' ]
+" mappings to jump to changed blocks
+nmap <leader>sn <plug>(signify-next-hunk)
+nmap <leader>sp <plug>(signify-prev-hunk)
+" nicer colors
+highlight DiffAdd           cterm=bold ctermbg=none ctermfg=119
+highlight DiffDelete        cterm=bold ctermbg=none ctermfg=167
+highlight DiffChange        cterm=bold ctermbg=none ctermfg=227
+highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
+highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
+highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
+
+" Window Chooser ------------------------------
+
+" mapping
+nmap  -  <Plug>(choosewin)
+" show big letters
+let g:choosewin_overlay_enable = 1
+
+" Airline ------------------------------
+
+let g:airline_powerline_fonts = 0
+let g:airline_theme = 'bubblegum'
+let g:airline#extensions#whitespace#enabled = 0
+
+" to use fancy symbols for airline, uncomment the following lines and use a
+" patched font (more info on the README.rst)
+"if !exists('g:airline_symbols')
+"   let g:airline_symbols = {}
+"endif
+"let g:airline_left_sep = '⮀'
+"let g:airline_left_alt_sep = '⮁'
+"let g:airline_right_sep = '⮂'
+"let g:airline_right_alt_sep = '⮃'
+"let g:airline_symbols.branch = '⭠'
+"let g:airline_symbols.readonly = '⭤'
+"let g:airline_symbols.linenr = '⭡'
