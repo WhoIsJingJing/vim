@@ -1,32 +1,32 @@
 #!/bin/bash
 echo "安装将花费一定时间，请耐心等待直到安装完成^_^"
-if which apt-get >/dev/null; then
-	echo "pass"
-	#sudo apt-get install -y vim vim-gnome ctags xclip astyle python-setuptools python-dev git
-elif which yum >/dev/null; then
-	sudo yum install -y gcc vim git ctags xclip astyle python-setuptools python-devel	
-elif which zypper >/dev/null; then
-       echo "pass"
-	# sudo zypper -y install  gcc vim git ctags xclip astyle python-setuptools python-devel
-fi
+# if which apt-get >/dev/null; then
+# 	echo "pass"
+# 	#sudo apt-get install -y vim vim-gnome ctags xclip astyle python-setuptools python-dev git
+# elif which yum >/dev/null; then
+# 	sudo yum install -y gcc vim git ctags xclip astyle python-setuptools python-devel
+# elif which zypper >/dev/null; then
+#        echo "pass"
+# 	# sudo zypper -y install  gcc vim git ctags xclip astyle python-setuptools python-devel
+# fi
 #Add HomeBrew support on  Mac OS
 if which brew >/dev/null;then
     echo "You are using HomeBrew tool"
     brew install vim ctags git astyle
 fi
-if ! which autopep8 >/dev/null; then 
-    sudo easy_install -ZU autopep8 
+if ! which autopep8 >/dev/null; then
+    sudo easy_install -ZU autopep8
 fi
 
 if [ ! -f /usr/local/bin/ctags ] ;then
     sudo ln -s /usr/bin/ctags /usr/local/bin/ctags
 fi
 
-if [ -d ~/vim ] ; then 
+if [ -d ~/vim ] ; then
 	mv -f ~/vim ~/vim_old
 fi
 
-if [ -d .git ]; then 
+if [ -d .git ]; then
     cp -r `pwd` ~/vim
 else
     cd ~/ && git clone https://github.com/WhoIsJingJing/vim.git
