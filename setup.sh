@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 echo "安装将花费一定时间，请耐心等待直到安装完成^_^"
 # if which apt-get >/dev/null; then
 # 	echo "pass"
@@ -14,8 +15,13 @@ if which brew >/dev/null;then
     echo "You are using HomeBrew tool"
     brew install vim ctags git astyle
 fi
+
 if ! which autopep8 >/dev/null; then
     sudo easy_install -ZU autopep8
+fi
+
+if ! pip3 list | grep neovim > /dev/null; then
+    sudo pip3 install --upgrade neovim 
 fi
 
 if [ ! -f /usr/local/bin/ctags ] ;then
@@ -23,20 +29,31 @@ if [ ! -f /usr/local/bin/ctags ] ;then
 fi
 
 if [ -d ~/vim ] ; then
-	mv -f ~/vim ~/vim_old
+    mv -f ~/vim ~/vim_old
 fi
 
 if [ -d .git ]; then
-    cp -r `pwd` ~/vim
+    cp -r "$(pwd)" ~/vim
 else
     cd ~/ && git clone https://github.com/WhoIsJingJing/vim.git
     git checkout origin/my_setting -b my_setting
 fi
+
+if [ -d ~/.vim_old ]; then 
+    rm -rf ~/.vim_old
+fi
+
+if [ -f ~/.vimrc_old ]; then 
+    rm ~/.vimrc_old
+fi
+
 mv -f ~/.vim ~/.vim_old
-mv -f ~/vim ~/.vim
 mv -f ~/.vimrc ~/.vimrc_old
+
+mv -f ~/vim ~/.vim
 mv -f ~/.vim/.vimrc ~/
-git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+
+#git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 echo "ma6174正在努力为您安装bundle程序" > ma6174
 echo "安装完毕将自动退出" >> ma6174
 echo "请耐心等待" >> ma6174
