@@ -59,6 +59,7 @@ Plug 'jeetsukumaran/vim-indentwise'
 Plug 'klen/python-mode'
 " Better autocompletion
 "Plug 'Shougo/neocomplcache.vim'
+Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neocomplete.vim'
 " Snippets manager (SnipMate), dependencies, and snippets repo
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -146,7 +147,8 @@ set guifont=文泉驿等宽微米黑:Courier_New:h10:cANSI   " 设置字体
 set showcmd         " 输入的命令显示出来，看的清楚些
 set shortmess=atI   " 启动的时候不显示那个援助乌干达儿童的提示
 set nocompatible  "去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限
-set nu
+set number
+set relativenumber
 set expandtab
 set tabstop=4
 set softtabstop=4
@@ -154,7 +156,7 @@ set shiftwidth=4
 set hlsearch
 set incsearch
 set ls=2
-set completeopt=preview,menu
+set completeopt=menu,longest
 set autoread
 set clipboard+=unnamed
 set magic                   " 设置魔术
@@ -188,6 +190,7 @@ set backupdir=~/.vim/dirs/backups " where to put backup files
 set undofile                      " persistent undos - undo after you re-open the file
 set undodir=~/.vim/dirs/undos
 set viminfo+=n~/.vim/dirs/viminfo
+set pastetoggle=<F2>
 
 filetype plugin indent on
 
@@ -205,7 +208,7 @@ endif
 "autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 "autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 "autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 "autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 autocmd FileType html setlocal shiftwidth=4 tabstop=4 softtabstop=4
@@ -326,11 +329,11 @@ let Tlist_File_Fold_Auto_Close = 1
 let Tlist_Exit_OnlyWindow = 1 "如果taglist窗口是最后一个窗口，则退出vim
 let Tlist_Use_Right_Window = 1 "在右侧窗口中显示taglist窗口
 
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1
-let g:tagbar_autofocus = 1
+"let g:miniBufExplMapWindowNavVim = 1
+"let g:miniBufExplMapWindowNavArrows = 1
+"let g:miniBufExplMapCTabSwitchBufs = 1
+"let g:miniBufExplModSelTarget = 1
+"let g:tagbar_autofocus = 1
 
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
 let g:ctrlp_map = ',e'
@@ -346,7 +349,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_python_checkers=['pylint']
+"let g:syntastic_python_checkers=['pylint']
 
 let g:pymode_lint_on_write = 0
 let g:pymode_lint_signs = 0
@@ -361,9 +364,10 @@ let g:tabman_focus  = 'tf'
 let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
 let g:signify_vcs_list = [ 'git', 'hg' ]
 
+let g:deoplete#enable_at_startup = 0
 "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
 " Disable AutoComplPop.
-let g:acp_enableAtStartup = 1
+let g:acp_enableAtStartup = 0
 " Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
@@ -399,8 +403,8 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
     let g:neocomplete#sources#omni#input_patterns = {}
 endif
 "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
@@ -431,6 +435,8 @@ func FormartSrc()
         exec "r !astyle --style=ansi --one-line=keep-statements -a --suffix=none %> /dev/null 2>&1"
     elseif &filetype == 'py'||&filetype == 'python'
         exec "r !autopep8 -i --aggressive %"
+    elseif &filetype == 'rs' || &filetype == 'rust'
+        exec "! rustfmt %"
     else
         exec "normal gg=G"
         return
@@ -502,12 +508,14 @@ func! CompileRunGcc()
     elseif &filetype == 'sh'
         :!time bash %
     elseif &filetype == 'python'
-        exec "!time python2.7 %"
+        exec "!time python3 %"
     elseif &filetype == 'html'
         exec "!firefox % &"
     elseif &filetype == 'go'
         "        exec "!go build %<"
         exec "!time go run %"
+    elseif &filetype == 'rust'
+        exec "!time cargo run"
     elseif &filetype == 'mkd'
         exec "!~/.vim/markdown.pl % > %.html &"
         exec "!firefox %.html &"
