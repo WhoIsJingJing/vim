@@ -39,62 +39,72 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'fisadev/vim-ctrlp-cmdpalette'
 " Zen coding
 Plug 'mattn/emmet-vim'
-" Git integration
+"tive.vim may very well be the best Git wrapper of all time.
 Plug 'tpope/vim-fugitive'
+
 " Tab list panel
-Plug 'kien/tabman.vim'
+"Plug 'kien/tabman.vim'
 " Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " Surround
-Plug 'tpope/vim-surround'
+"Plug 'tpope/vim-surround'
 " Autoclose
 Plug 'Townk/vim-autoclose'
 " Indent text object
 Plug 'michaeljsmith/vim-indent-object'
 " Indentation based movements
 Plug 'jeetsukumaran/vim-indentwise'
-" Python mode (indentation, doc, refactor, lints, code checking, motion and
+
+"Python mode (indentation, doc, refactor, lints, code checking, motion and
 " operators, highlighting, run and ipdb breakpoints)
-Plug 'klen/python-mode'
+"Plug 'klen/python-mode'
+
 " Better autocompletion
 "Plug 'Shougo/neocomplcache.vim'
 Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neocomplete.vim'
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote')  }
 
 " Snippets manager (SnipMate), dependencies, and snippets repo
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
-Plug 'honza/vim-snippets'
 Plug 'garbas/vim-snipmate'
+" Optional:
+Plug 'honza/vim-snippets'
+
 " Git/mercurial/others diff icons on the side of the file lines
 Plug 'mhinz/vim-signify'
+
 " Automatically sort python imports
-Plug 'fisadev/vim-isort'
+"Plug 'fisadev/vim-isort'
+
 " Drag visual blocks arround
-Plug 'fisadev/dragvisuals.vim'
+"Plug 'fisadev/dragvisuals.vim'
+
 " Window chooser
 Plug 't9md/vim-choosewin'
+
 " Python and other languages code checker
 Plug 'scrooloose/syntastic'
+
 " Paint css colors with the real color
 Plug 'lilydjwg/colorizer'
+
 " Ack code search (requires ack installed in the system)
-Plug 'mileszs/ack.vim'
-if has('python')
+"Plug 'mileszs/ack.vim'
+
+"if has('python')
     " YAPF formatter for Python
-    Plug 'pignacio/vim-yapf-format'
-endif
+"    Plug 'pignacio/vim-yapf-format'
+"endif
 
 " Search results counter
-Plug 'IndexedSearch'
+"Plug 'IndexedSearch'
 
 " Yank history navigation
-Plug 'YankRing.vim'
+Plug 'vim-scripts/YankRing.vim'
+
 """"""""""""""""""""""""""
-"tive.vim may very well be the best Git wrapper of all time.
-Plug 'tpope/vim-fugitive'
 "This plugin is used for displaying thin vertical lines at each indentation level for code indented with spaces.
 Plug 'Yggdroot/indentLine'
 
@@ -103,8 +113,9 @@ Plug 'Yggdroot/indentLine'
 "   Jumping to tags and help
 "   Running commands, or previous searches and commands
 Plug 'wincent/command-t'
+
 "Insert or delete brackets, parens, quotes in pair.
-Plug 'Auto-Pairs'
+Plug 'jiangmiao/auto-pairs'
 
 "Append system clipboard changes to current buffer.
 Plug 'CaptureClipboard'
@@ -113,7 +124,7 @@ Plug 'CaptureClipboard'
 Plug 'lifepillar/pgsql.vim'
 
 "Fuzzy file, buffer, mru, tag, etc finder.
-Plug 'ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 "A super simple function navigator for ctrlp.vim.
 "For lazy people who cannot wait until ctags finishes.
 Plug 'tacahiroy/ctrlp-funky'
@@ -132,7 +143,12 @@ Plug 'xolox/vim-lua-ftplugin'
 Plug 'evanmiller/nginx-vim-syntax'
 "css3
 Plug 'hail2u/vim-css3-syntax'
+"hexmode
 Plug 'fidian/hexmode'
+
+"Mini map
+"Plug 'severin-lemaignan/vim-minimap'
+
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
 " Install plugins the first time vim runs
@@ -162,8 +178,8 @@ set completeopt=menu,longest
 set autoread
 set clipboard+=unnamed
 set magic                   " 设置魔术
-set guioptions-=T           " 隐藏工具栏
-set guioptions-=m           " 隐藏菜单栏
+"set guioptions-=T           " 隐藏工具栏
+"set guioptions-=m           " 隐藏菜单栏
 set noeb
 set confirm
 set ignorecase
@@ -207,15 +223,15 @@ if has("autocmd")
 endif
 
 " Enable omni completion.
-"autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-"autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-"autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 autocmd FileType html setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd FileType javascript setlocal shiftwidth=4 tabstop=4 softtabstop=4
-autocmd FileType c,cpp map <buffer> <leader><space> :w<cr>:make<cr>
+"autocmd FileType c,cpp map <buffer> <leader><space> :w<cr>:make<cr>
 autocmd vimenter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 autocmd BufNewFile *.cpp,*.c,*.h,*.sh,*.bash,*.rb,*.py exec ":call SetTitle()"
@@ -228,20 +244,19 @@ inoremap <expr><C-l>     neocomplete#complete_common_string()
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 " <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 " Close popup by <Space>.
 "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <F2> <Esc>
 map <F3> :NERDTreeToggle<CR>
 map <F4> :TagbarToggle<CR>
 map <F5> :call CompileRunGcc()<CR>
 map <F6> :call FormartSrc()<CR><CR>
+map <F7> :noh <CR>
 map <F8> :call Rungdb()<CR>
-map <F12> gg=G
 map <C-F3> \be
 map! <C-Z> <Esc>zzi
 map! <C-O> <C-Y>,
@@ -335,11 +350,11 @@ let Tlist_Use_Right_Window = 1 "在右侧窗口中显示taglist窗口
 "let g:miniBufExplMapWindowNavArrows = 1
 "let g:miniBufExplMapCTabSwitchBufs = 1
 "let g:miniBufExplModSelTarget = 1
-"let g:tagbar_autofocus = 1
+let g:tagbar_autofocus = 1
 
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
 let g:ctrlp_map = ',e'
-let g:ctrlp_working_path_mode = 0
+let g:ctrlp_working_path_mode = 1
 
 let g:syntastic_check_on_open = 1
 let g:syntastic_enable_signs = 1
@@ -350,19 +365,12 @@ let g:syntastic_style_warning_symbol = '⚠'
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-"let g:syntastic_python_checkers=['pylint']
+let g:syntastic_check_on_wq = 1
+let g:syntastic_python_checkers=['pylint']
 
-let g:pymode_lint_on_write = 0
-let g:pymode_lint_signs = 0
-let g:pymode_folding = 0
-let g:pymode_rope = 0
-let g:pymode_rope_goto_definition_bind = ',d'
-let g:pymode_rope_goto_definition_cmd = 'e'
+"let g:tabman_toggle = 'tl'
+"let g:tabman_focus  = 'tf'
 
-let g:acp_enableAtStartup = 0
-let g:tabman_toggle = 'tl'
-let g:tabman_focus  = 'tf'
 let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
 let g:signify_vcs_list = [ 'git', 'hg' ]
 
@@ -398,7 +406,6 @@ let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 "set completeopt+=longest
 "let g:neocomplete#enable_auto_select = 1
 "let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
@@ -412,9 +419,11 @@ let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\
 " https://github.com/c9s/perlomni.vim
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
-let g:airline_theme = 'syntastic'
+"let g:airline_theme = 'syntastic'
 let g:airline#extensions#whitespace#enabled = 1
+
 let g:choosewin_overlay_enable = 1
+
 let g:airline_powerline_fonts = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 highlight DiffAdd           cterm=bold ctermbg=none ctermfg=119
@@ -469,30 +478,28 @@ func SetTitle()
     elseif &filetype == 'python'
         call setline(1,"#!/usr/bin/env python3")
         call append(line("."),"# -*- coding: UTF-8 -*-")
-        call append(line(".")+1,"# Created Time:".strftime("%Y-%m-%d %H:%M:%S"))
-        call append(line(".")+2, "")
-    else
-        call setline(1, "/*************************************************************************")
-        call append(line("."), "	> File Name: ".expand("%"))
-        call append(line(".")+1, "	> Author: ")
-        call append(line(".")+2, "	> Mail: ")
-        call append(line("."),"# Created Time:".strftime("%Y-%m-%d %H:%M:%S"))
-        call append(line(".")+4, " ************************************************************************/")
-        call append(line(".")+5, filetype)
-    endif
-    if expand("%:e") == 'cpp'
-        call append(line(".")+6, "#include<iostream>")
-        call append(line(".")+7, "using namespace std;")
-        call append(line(".")+8, "")
-    endif
-    if &filetype == 'c'
-        call append(line(".")+6, "#include<stdio.h>")
-        call append(line(".")+7, "")
-    endif
-    if expand("%:e") == 'h'
-        call append(line(".")+6, "#ifndef _".toupper(expand("%:r"))."_H")
-        call append(line(".")+7, "#define _".toupper(expand("%:r"))."_H")
-        call append(line(".")+8, "#endif")
+        call append(line(".")+1,"\"\"\"")
+        call append(line(".")+2,"__created__=".strftime("'%Y-%m-%d %H:%M:%S'"))
+        call append(line(".")+3,"\"\"\"")
+        call append(line(".")+4, "")
+"    elseif &filetype == 'c'
+"        call append(line(".")+6, "#include<stdio.h>")
+"        call append(line(".")+7, "")
+"    elseif expand("%:e") == 'cpp'
+"        call append(line(".")+6, "#include<iostream>")
+"        call append(line(".")+7, "using namespace std;")
+"        call append(line(".")+8, "")
+"    elseif expand("%:e") == 'h'
+"        call append(line(".")+6, "#ifndef _".toupper(expand("%:r"))."_H")
+"        call append(line(".")+7, "#define _".toupper(expand("%:r"))."_H")
+"        call append(line(".")+8, "#endif")
+"    else
+"        call setline(1, "/*************************************************************************")
+"        call append(line("."), "	> File Name: ".expand("%"))
+"        call append(line(".")+1, "	> Author: ")
+"        call append(line(".")+2, "	> Mail: ")
+"        call append(line("."),"# Created Time:".strftime("%Y-%m-%d %H:%M:%S"))
+"        call append(line(".")+4, " ************************************************************************/")
     endif
     "新建文件后，自动定位到文件末尾
 endfunc
@@ -514,7 +521,7 @@ func! CompileRunGcc()
     elseif &filetype == 'html'
         exec "!firefox % &"
     elseif &filetype == 'go'
-        "        exec "!go build %<"
+        exec "!go build %<"
         exec "!time go run %"
     elseif &filetype == 'rust'
         exec "!time cargo run"
