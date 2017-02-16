@@ -161,7 +161,7 @@ endif
 syntax on
 color sea     " 设置背景主题
 color ron     " 设置背景主题
-set guifont=文泉驿等宽微米黑:Courier_New:h10:cANSI   " 设置字体
+"set guifont=文泉驿等宽微米黑:Courier_New:h10:cANSI   " 设置字体
 set showcmd         " 输入的命令显示出来，看的清楚些
 set shortmess=atI   " 启动的时候不显示那个援助乌干达儿童的提示
 set nocompatible  "去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限
@@ -414,12 +414,13 @@ let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\
 " https://github.com/c9s/perlomni.vim
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
-"let g:airline_theme = 'syntastic'
-let g:airline#extensions#whitespace#enabled = 1
+" let g:airline_theme = 'syntastic'
+" let g:airline#extensions#whitespace#enabled = 1
 
 let g:choosewin_overlay_enable = 1
 
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 0
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 highlight DiffAdd           cterm=bold ctermbg=none ctermfg=119
 highlight DiffDelete        cterm=bold ctermbg=none ctermfg=167
